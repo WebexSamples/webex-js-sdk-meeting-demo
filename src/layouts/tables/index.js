@@ -17,13 +17,14 @@ import * as React from "react";
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import { Backdrop, Box, Modal, Fade, Button, Typography } from "@mui/material";
+import { IconButton, Icon, Box, Modal, Fade, Typography, Radio, RadioGroup, FormControl, FormControlLabel, FormLabel } from "@mui/material";
 import MDBadge from "components/MDBadge";
-import { IconButton, Icon } from "@mui/material";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
+import MDButton from "components/MDButton";
+import MDAvatar from "components/MDAvatar";
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -39,30 +40,48 @@ import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
 // import projectsTableData from "layouts/tables/data/projectsTableData";
 // import TransitionsModal from "../../examples/Modal/BasicModal";
+import {
+  useMaterialUIController,
+} from "context";
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 800,
-  bgcolor: "background.paper",
+  bgcolor: "rgba(255,255,255,0.97)",
   border: "2px solid #000",
   boxShadow: 24,
   p: 6,
 };
 function Tables() {
+
+
+
+  const [controller] = useMaterialUIController();
+  const { sidenavColor } = controller;
   const { columns, Job, Author } = authorsTableData();
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  /* brining row and coloumn */
+  const [openMeeting, setOpenMeeting] = React.useState(false);
+  const handleOpenMeeting = () => setOpenMeeting(true);
+  const handleCloseMeeting = () => setOpenMeeting(false);
+
+
+
 
   const handleCallSupport = () => {
     handleOpen();
   };
+  const joinMeeting = () => {
+    // handleClose();
+    handleOpenMeeting();
+  };
 
+const meetingStyle= {...style,width:1200,height:600};
   const rows = [
     {
       product: <Author image={team2} name="Recliner" email="johnEStore@gmail.com" />,
@@ -224,7 +243,7 @@ function Tables() {
               </MDBox>
             </Card>
           </Grid>
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <Card>
               <MDBox
                 mx={2}
@@ -239,7 +258,7 @@ function Tables() {
                 <MDTypography variant="h6" color="white">
                   Projects Table
                 </MDTypography>
-              </MDBox>
+              </MDBox> 
               <MDBox pt={3}>
                 {/* <DataTable
                   table={{ columns: pColumns, rows: pRows }}
@@ -247,10 +266,10 @@ function Tables() {
                   entriesPerPage={false}
                   showTotalEntries={false}
                   noEndBorder
-                /> */}
+                /> 
               </MDBox>
             </Card>
-          </Grid>
+          </Grid>*/}
         </Grid>
       </MDBox>
       <>
@@ -260,27 +279,63 @@ function Tables() {
           open={open}
           onClose={handleClose}
           closeAfterTransition
+          style={{ backdropFilter: "blur(5px)" }}
         >
           <Fade in={open}>
-            <Box sx={style}>
-              <Typography id="transition-modal-title" variant="h6" component="h2">
-                Modal Header
-              </Typography>
-              <Typography id="transition-modal-description" sx={{ mt: 5 }}>
-                <div className="container">
-                  <label htmlFor="">Contact Name</label>
-                  <input type="text" />
-                  <label htmlFor="">Contact Email</label>
-                  <input type="text" />
-                </div>
+            <Box sx={style}  >
+              <h3 
+               style={{display: "flex",justifyContent: "center" }}> <MDAvatar src={team2} name={'Recliner'} size="xxl" />&nbsp;
+                Recliner - Furniture  &nbsp; <MDBox ml={-1}>
+                  <MDBadge badgeContent="damaged" color="warning" variant="gradient" size="sm" />
+                </MDBox></h3>
+              <Typography id="transition-modal-description" sx={{ mt: 1 }}>
+                <h4 id="demo-row-radio-buttons-group-label">  What do you need assistance with?</h4>
+                <p >
+                  Return   <input type="radio" id="html" name="assistance" value=""></input> &nbsp;
+                  Installation   <input type="radio" id="html" name="assistance" value=""></input>
+                </p>
+                <br/>
+                <h4 id="demo-row-radio-buttons-group-label"> What kind kind of support you are looking for?</h4>
+                <p >
+                  Chat   <input type="radio" id="html" name="support" value=""></input>&nbsp;
+                  Meeting  <input type="radio" id="html" name="support" value=""></input>
+                </p>
+                <br/>
+
+                <MDButton
+                  component="a"
+                  rel="noreferrer"
+                  variant="gradient"
+                  color={sidenavColor}
+                  fullWidth
+                  onClick={joinMeeting}
+                >
+                  Join Meeting
+                </MDButton>
               </Typography>
             </Box>
           </Fade>
         </Modal>
       </>
-      <Footer />
+      <>
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={openMeeting}
+          onClose={handleCloseMeeting}
+          closeAfterTransition
+          style={{ backdropFilter: "blur(5px)" }}
+        >
+          <Fade in={openMeeting}>
+            <Box sx={meetingStyle} >
+              <h3> Meeting Info</h3>
+            </Box>
+          </Fade>
+        </Modal>
+      </>
+      {/* <Footer /> */}
     </DashboardLayout>
-  );
-}
+  )
+  };      
 
 export default Tables;
