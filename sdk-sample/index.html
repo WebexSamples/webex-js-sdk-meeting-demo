@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Webex Meeting SDK POC</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main id="root" style="margin: 1.5rem 0">
+      <section id="stream" class="container">
+        <h2>Meeting</h2>
+
+        <div style="display: flex; gap: 0.25rem">
+          <fieldset style="flex: 0.5" class="custom-fieldset">
+            <legend>Local Video</legend>
+            <video id="local-video" class="stream-video" autoplay></video>
+            <audio id="local-audio" autoplay controls></audio>
+          </fieldset>
+
+          <fieldset style="flex: 0.5" class="custom-fieldset">
+            <legend>Remote Video</legend>
+            <video id="remote-video" class="stream-video" autoplay></video>
+            <audio id="remote-audio" autoplay controls></audio>
+          </fieldset>
+        </div>
+
+        <!-- Join the meeting -->
+        <div style="margin-top: 1rem">
+          <button id="join-with-media" class="btn-primary">Join meeting</button>
+          <button id="leave-meeting" class="btn-danger" style="display: none">Leave meeting</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="https://unpkg.com/webex@next/umd/webex.min.js"></script>
+    <script type="module" src="sdk-main.js" defer></script>
+  </body>
+</html>
