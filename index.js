@@ -21,3 +21,10 @@ function openMeetingModal() {
   const meetingModal = document.getElementById("#meetingModal");
   meetingModal.style.display = "block";
 }
+
+function closeMeetingModal() {
+  const body = document.getElementById("#body");
+  body.style.filter = "none";
+  const meetingModal = document.getElementById("#meetingModal");
+  meetingModal.style.display = "none";
+}
