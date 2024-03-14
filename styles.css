@@ -29,7 +29,7 @@
 
 .side-ele {
   height: 40px;
-  font-weight: 100;
+  font-weight: 600;
   margin-top: 10px;
   text-align: left;
   padding: 0 0 0 30px;
@@ -101,6 +101,7 @@ table {
   background-color: #202840;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+  font-weight: 500;
 }
 
 th,
@@ -118,6 +119,7 @@ th {
 
 tr .header {
   padding-top: 70px;
+  font-weight: 600;
 }
 
 .product-avatar {
@@ -200,6 +202,8 @@ tr .header {
   );
   position: absolute;
   top: 99px;
+  font-weight: 500;
+  font-size: 1.25rem;
 }
 
 .formModal {
@@ -211,6 +215,7 @@ tr .header {
   background: white;
   box-shadow: inset;
   padding: 20px;
+  font-weight: 400;
   p {
     color: black;
   }
@@ -225,6 +230,8 @@ tr .header {
   color: #fff;
   border: none;
   border-radius: 5px;
+  display: none;
+  font-weight: 500;
 }
 
 .meetingModal {
@@ -281,7 +288,6 @@ tr .header {
   padding: 8px 16px;
   border-radius: 5px;
   cursor: pointer;
-  width: 24%;
 }
 
 .btn-primary:hover {
@@ -323,12 +329,13 @@ h2 {
   border: 1px solid #ccc;
 }
 
-.custom-fieldset {
+.custom-fieldset-vbg {
   border: 1px solid lightgrey;
 }
 
 .custom-fieldset video {
-  width: 41.75rem;
+    width: 105rem;
+    height: 34rem;
 }
 
 audio {
@@ -339,4 +346,37 @@ audio {
 
 input[type="radio"]{
   cursor: pointer;
+}
+#support-row{
+  display: none;
+}
+
+#local-video-section{
+  position: fixed;
+  bottom: 10%;
+  right: 5%;
+  background-color: white;
+  width: 20rem;
+  height: 14rem;
+  cursor: move;
+  border-radius: 0.5rem;
+}
+audio{
+  visibility: hidden;
+}
+#local-video-section video{
+  width: 24rem;
+}
+
+.controls-btn-group{
+  position: absolute;
+    bottom: 5%;
+    left: 40%;
+}
+.support-td{
+  cursor: pointer;
+}
+
+#join-with-media{
+  background-color: #59b15d;
 }

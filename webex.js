@@ -11,7 +11,7 @@ const remoteAudioStreamElm = document.getElementById('remote-audio');
 const localVideoStreamElm = document.getElementById('local-video');
 const localAudioStreamElm = document.getElementById('local-audio');
 
-// import { meetingInfo, guestEndpointUrl } from './meeting-info.js';
+import { meetingInfo, guestEndpointUrl } from './meeting-info.js';
 
 let webex = null;
 let createdMeeting = null;
@@ -27,13 +27,13 @@ rootElement.addEventListener('click', async (e) => {
       await leaveMeeting();
       break;
       case 'toggle-audio-btn':
-        toggleText(e.target, ['Mute', 'UnMute']);
+        toggleText(e.target, ['mute', 'unmute']);
         break;
       case 'toggle-video-btn':
-        toggleText(e.target, ['Video On', 'Video Off']);
+        toggleText(e.target, ['video-on', 'video-off']);
         break;
       case 'toggle-screen-share-btn':
-        toggleText(e.target, ['Start Screen Share', 'Stop Screen Share']);
+        toggleText(e.target, ['start-sharing', 'stop-sharing']);
         break;
 
     default:
@@ -225,5 +225,8 @@ function enableVBG() {}
 
 
 function toggleText (element, [text1, text2]) {
-  element.innerText = element.innerText === text1 ? text2 : text1;
+
+  const srcText= element.childNodes[1].src;
+  const isExistingSrc= srcText.includes(`/${text1}`);
+  element.childNodes[1].src = isExistingSrc ? srcText.replace(`/${text1}`, `/${text2}`):srcText.replace(`/${text2}`, `/${text1}`);
 };

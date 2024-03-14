@@ -7,7 +7,8 @@
     rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <script defer type="text/javascript" src="index.js"></script>
-  <script defer type="text/javascript" src="webex.js"></script>
+  <script defer src="https://unpkg.com/webex@next/umd/webex.min.js"></script>
+  <script type="module" type="text/javascript" src="webex.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>E-store</title>
@@ -26,11 +27,11 @@
         </div>
         <div class="side-ele-selected">
           <p class="text-in-box" style="height: 40px">
-            <img class="icon" src="images/order.png" />Order
+            <img class="icon" src="images/order.png" />Your Orders
           </p>
         </div>
         <div class="side-ele">
-          <img class="icon" src="images/settings.png" />Setting
+          <img class="icon" src="images/settings.png" />Settings
         </div>
         <div class="side-ele">
           <img class="icon" src="images/profile.png" />Profile
@@ -39,18 +40,18 @@
           <img class="icon" src="images/logout.png" />Logout
         </div>
         <div class="profile">
-          <p class="john">John Duo</p>
+          <p class="john">John Doe</p>
         </div>
       </div>
       <div id="#main-view" class="main-view" style="display: flex">
         <div id="#bread-crums" class="breadcrumb">
           <img class="icon" style="opacity: 60%" src="images/home.png" />
-          <p style="margin: 0; margin-right: 950px">/ Tables</p>
+          <p style="margin: 0; margin-right: 950px"> > Orders</p>
           <img class="icon" style="opacity: 60%" src="images/profile.png" />
           <img class="icon" style="opacity: 60%" src="images/setting.png" />
           <img class="icon" style="opacity: 60%" src="images/bell.png" />
         </div>
-        <div class="product-table">Products Table</div>
+        <div class="product-table">Products</div>
         <table style="margin: 80px 0 0 -20px; width: 99%">
           <tbody>
             <tr>
@@ -83,8 +84,8 @@
                   <p class="text-in-small-box">Damaged</p>
                 </div>
               </td>
-              <td onclick="openModal()">
-                <img class="icon-call" style="opacity: 60%" src="images/call.png" />
+              <td class="support-td" onclick="openModal()">
+                <img class="icon-call" style="opacity: 90%" src="images/call.png" />
               </td>
               <td>2024-03-02</td>
             </tr>
@@ -197,22 +198,25 @@
           Please choose an option bellow
         </p>
       </div>
-
+      <h2>Smart TV  - Electronics -   Delivered  -   2024-03-02</h2>
       <p>What do you need assistance with?</p>
-      <div style="display: flex">
-        <input type="radio" name="return" id="" />
+      <div style="display: flex;" onclick="handlerAssistanceOnchange()">
+        <input type="radio" name="assistance" id="" />
         <p style="margin-right: 140px">Return</p>
-        <input type="radio" name="Installation" id="" />
+        <input type="radio" name="assistance" id="" />
         <p>Installation</p>
       </div>
 
-      <p>What kind kind of support you are looking for?</p>
-      <div style="display: flex">
-        <input type="radio" name="Chat" id="" />
-        <p style="margin-right: 140px">Chat</p>
-        <input type="radio" name="Meeting" id="" />
-        <p>Meeting</p>
+      <div id="support-row">
+        <p>What kind kind of support you are looking for?</p>
+        <div style="display: flex;" onchange="handlerSupportOnchange()">
+          <input type="radio" name="support" id="" />
+          <p style="margin-right: 140px">Chat</p>
+          <input type="radio" name="support" id="" />
+          <p>Meeting</p>
+        </div>
       </div>
+
     </div>
     <button class="get-help" onclick="openMeetingModal()">Get Help</button>
   </div>
@@ -224,49 +228,56 @@
     <div class="video-container">
       <main id="root" style="margin: 1.5rem 0">
         <section id="stream" class="container">
-          <h2>Meeting</h2>
-
-          <div style="display: flex; gap: 0.25rem">
-            <fieldset style="flex: 0.5" class="custom-fieldset">
-              <legend>Local Video</legend>
+          <div>
+            <div style="flex: 0.5" class="custom-fieldset" id="local-video-section">
               <video id="local-video" class="stream-video" autoplay></video>
               <audio id="local-audio" autoplay controls></audio>
-            </fieldset>
+            </div>
 
-            <fieldset style="flex: 0.5" class="custom-fieldset">
-              <legend>Remote Video</legend>
+            <div style="flex: 0.5" class="custom-fieldset">
               <video id="remote-video" class="stream-video" autoplay></video>
               <audio id="remote-audio" autoplay controls></audio>
-            </fieldset>
-            <fieldset style="flex: 0.5" class="custom-fieldset">
+              <div class="controls-btn-group" style="margin-top: 1rem">
+                <button id="toggle-audio-btn" onclick="toggleAudio()">
+                  <img class="icon" src="images/controls/mute.png" />
+                </button>
+                <button id="toggle-video-btn" onclick="toggleVideo()">
+                  <img class="icon" src="images/controls/video-on.png" />
+                </button>
+                <button id="toggle-screen-share-btn" onclick="toggleScreenShare()">
+                  <img class="icon" src="images/controls/start-sharing.png" />
+                </button>
+                <!-- Join the meeting -->
+
+                <button id="join-with-media" class="btn-primary">
+                  <img class="icon" src="images/controls/join-meeting.png" />
+                </button>
+                <button id="leave-meeting" class="btn-danger" style="display: none">
+                  <img class="icon" src="images/call.png" />
+                </button>
+                <br />
+                <fieldset style="flex: 0.5" class="custom-fieldset-vbg">
+                  <legend>VBG</legend>
+                  <div style="display: flex">
+                    <input type="radio" name="vbg" id="" checked />
+                    <p style="margin-right: 2rem">Blur</p>
+                    <input type="radio" name="vbg" id="" />
+                    <p style="margin-right: 2rem">Image</p>
+                    <button id="toggle-vbg-btn">Toggle VBG</button>
+                  </div>
+                </fieldset>
+
+              </div>
+            </div>
+            <!-- <fieldset style="flex: 0.5" class="custom-fieldset">
               <legend>Transcription</legend>
               <aside id="transcription-description">
 
               </aside>
-            </fieldset>
+            </fieldset> -->
           </div>
 
-          <div class="controls-btn-group" style="margin-top: 1rem">
-            <button id="toggle-audio-btn" onclick="toggleAudio()">Mute</button>
-            <button id="toggle-video-btn" onclick="toggleVideo()">Video On</button>
-            <button id="toggle-screen-share-btn" onclick="toggleScreenShare()">Start Screen share</button>
-             <!-- Join the meeting -->
 
-            <button id="join-with-media" class="btn-primary">Join meeting</button>
-            <button id="leave-meeting" class="btn-danger" style="display: none">Leave meeting</button>
-             <br/>
-            <fieldset style="flex: 0.5" class="custom-fieldset">
-              <legend>VBG</legend>
-              <div style="display: flex">
-                <input type="radio" name="vbg" id="" checked/>
-                <p style="margin-right: 2rem">Blur</p>
-                <input type="radio" name="vbg" id="" />
-                <p style="margin-right: 2rem">Image</p>
-              <button id="toggle-vbg-btn">Toggle VBG</button>
-              </div>
-            </fieldset>
-
-          </div>
         </section>
       </main>
     </div>
