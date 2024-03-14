@@ -225,6 +225,7 @@ tr .header {
   color: #fff;
   border: none;
   border-radius: 5px;
+  display: none;
 }
 
 .meetingModal {
@@ -339,4 +340,24 @@ audio {
 
 input[type="radio"]{
   cursor: pointer;
+}
+#support-row{
+  display: none;
+}
+
+#local-video-section{
+  position: fixed;
+  bottom: 10%;
+  right: 5%;
+  background-color: white;
+  width: 20rem;
+  height: 14rem;
+  cursor: move;
+  border-radius: 0.5rem;
+}
+audio{
+  visibility: hidden;
+}
+#local-video-section video{
+  width: 24rem;
 }

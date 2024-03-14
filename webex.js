@@ -11,7 +11,7 @@ const remoteAudioStreamElm = document.getElementById('remote-audio');
 const localVideoStreamElm = document.getElementById('local-video');
 const localAudioStreamElm = document.getElementById('local-audio');
 
-// import { meetingInfo, guestEndpointUrl } from './meeting-info.js';
+import { meetingInfo, guestEndpointUrl } from './meeting-info.js';
 
 let webex = null;
 let createdMeeting = null;

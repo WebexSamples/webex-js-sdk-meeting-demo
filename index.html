@@ -7,7 +7,8 @@
     rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <script defer type="text/javascript" src="index.js"></script>
-  <script defer type="text/javascript" src="webex.js"></script>
+  <script defer src="https://unpkg.com/webex@next/umd/webex.min.js"></script>
+  <script type="module" type="text/javascript" src="webex.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>E-store</title>
@@ -84,7 +85,7 @@
                 </div>
               </td>
               <td onclick="openModal()">
-                <img class="icon-call" style="opacity: 60%" src="images/call.png" />
+                <img class="icon-call" style="opacity: 90%" src="images/call.png" />
               </td>
               <td>2024-03-02</td>
             </tr>
@@ -199,20 +200,23 @@
       </div>
 
       <p>What do you need assistance with?</p>
-      <div style="display: flex">
-        <input type="radio" name="return" id="" />
+      <div style="display: flex;cursor: pointer;" onclick="handlerAssistanceOnchange()">
+        <input type="radio" name="assistance" id="" />
         <p style="margin-right: 140px">Return</p>
-        <input type="radio" name="Installation" id="" />
+        <input type="radio" name="assistance" id="" />
         <p>Installation</p>
       </div>
 
+      <div id="support-row">
       <p>What kind kind of support you are looking for?</p>
-      <div style="display: flex">
-        <input type="radio" name="Chat" id="" />
+      <div style="display: flex;cursor: pointer;" onchange="handlerSupportOnchange()">
+        <input type="radio" name="support" id="" />
         <p style="margin-right: 140px">Chat</p>
-        <input type="radio" name="Meeting" id="" />
+        <input type="radio" name="support" id="" />
         <p>Meeting</p>
       </div>
+    </div>
+
     </div>
     <button class="get-help" onclick="openMeetingModal()">Get Help</button>
   </div>
@@ -224,10 +228,9 @@
     <div class="video-container">
       <main id="root" style="margin: 1.5rem 0">
         <section id="stream" class="container">
-          <h2>Meeting</h2>
 
           <div style="display: flex; gap: 0.25rem">
-            <fieldset style="flex: 0.5" class="custom-fieldset">
+            <fieldset style="flex: 0.5" class="custom-fieldset" id="local-video-section">
               <legend>Local Video</legend>
               <video id="local-video" class="stream-video" autoplay></video>
               <audio id="local-audio" autoplay controls></audio>
@@ -247,7 +250,9 @@
           </div>
 
           <div class="controls-btn-group" style="margin-top: 1rem">
-            <button id="toggle-audio-btn" onclick="toggleAudio()">Mute</button>
+            <button id="toggle-audio-btn" onclick="toggleAudio()">
+              <img class="icon" src="images/controls/mute.png" />
+            </button>
             <button id="toggle-video-btn" onclick="toggleVideo()">Video On</button>
             <button id="toggle-screen-share-btn" onclick="toggleScreenShare()">Start Screen share</button>
              <!-- Join the meeting -->
