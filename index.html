@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script defer type="text/javascript" src="index.js"></script>
+  <script defer src="https://unpkg.com/webex@next/umd/webex.min.js"></script>
+  <script type="module" type="text/javascript" src="webex.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E-store</title>
+</head>
+
+<body class="body">
+  <div id="#body">
+    <div style="display: flex; margin: 0; padding: 0">
+      <div id="#side-nav" class="side-nav border" style="padding: 5px;color:#000">
+        <div style="padding: 35px; text-align: center; color: white">
+          <img class="icon" style="width: 40px; height: 40px" src="images/store.png" /><b
+            style="font-size: large">My-store</b>
+        </div>
+        <div class="side-ele">
+          <img class="icon" src="images/dashboard.png" />Dashboard
+        </div>
+        <div class="side-ele-selected">
+          <p class="text-in-box" style="height: 40px">
+            <img class="icon" src="images/order.png" />Your Orders
+          </p>
+        </div>
+        <div class="side-ele">
+          <img class="icon" src="images/settings.png" />Settings
+        </div>
+        <div class="side-ele">
+          <img class="icon" src="images/profile.png" />Profile
+        </div>
+        <div class="side-ele">
+          <img class="icon" src="images/logout.png" />Logout
+        </div>
+        <div class="profile">
+          <p class="john">John Doe</p>
+        </div>
+      </div>
+      <div id="#main-view" class="main-view" style="display: flex">
+        <div id="#bread-crums" class="breadcrumb">
+          <img class="icon" style="opacity: 60%" src="images/home.png" />
+          <p style="margin: 0; margin-right: 950px"> > Orders</p>
+          <img class="icon" style="opacity: 60%" src="images/profile.png" />
+          <img class="icon" style="opacity: 60%" src="images/setting.png" />
+          <img class="icon" style="opacity: 60%" src="images/bell.png" />
+        </div>
+        <div class="product-table">Products</div>
+        <table style="margin: 80px 0 0 -20px; width: 99%">
+          <tbody>
+            <tr>
+              <td class="header">
+                <p>PRODUCT</p>
+              </td>
+              <td class="header">
+                <p>CATEGORY</p>
+              </td>
+              <td class="header">
+                <p>STATUS</p>
+              </td>
+              <td class="header">
+                <p>SUPPORT</p>
+              </td>
+              <td class="header">
+                <p>PURCHASE DATE</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="product">
+                <div class="avatar-container">
+                  <img src="images/smart-tv.avif" />
+                </div>
+                Smart TV
+              </td>
+              <td>Electronics</td>
+              <td class="green">
+                <div class="status-yellow">
+                  <p class="text-in-small-box">Damaged</p>
+                </div>
+              </td>
+              <td class="support-td" onclick="openModal()">
+                <img class="icon-call" style="opacity: 90%" src="images/call.png" />
+              </td>
+              <td>2024-03-02</td>
+            </tr>
+            <tr>
+              <td class="product">
+                <div class="avatar-container">
+                  <img src="images/recliner.jpg" />
+                </div>
+                Recliner
+              </td>
+              <td>Furniture</td>
+              <td class="green">
+                <div class="status-green">
+                  <p class="text-in-small-box">Delivered</p>
+                </div>
+              </td>
+              <td>
+                <img class="icon-call" style="opacity: 60%" src="images/call.png" />
+              </td>
+              <td>2024-01-22</td>
+            </tr>
+            <tr>
+              <td class="product">
+                <div class="avatar-container">
+                  <img src="images/headphones.avif" />
+                </div>
+                Wireless Headphones
+              </td>
+              <td>Electronics</td>
+              <td class="green">
+                <div class="status-green">
+                  <p class="text-in-small-box">Delivered</p>
+                </div>
+              </td>
+              <td>
+                <img class="icon-call" style="opacity: 60%" src="images/call.png" />
+              </td>
+              <td>2023-04-15</td>
+            </tr>
+
+            <tr>
+              <td class="product">
+                <div class="avatar-container">
+                  <img src="images/camera.webp" />
+                </div>
+                DSLR Camera
+              </td>
+              <td>Electronics</td>
+              <td class="green">
+                <div class="status-green">
+                  <p class="text-in-small-box">Delivered</p>
+                </div>
+              </td>
+              <td>
+                <img class="icon-call" style="opacity: 60%" src="images/call.png" />
+              </td>
+              <td>2023-05-05</td>
+            </tr>
+
+            <tr>
+              <td class="product">
+                <div class="avatar-container">
+                  <img src="images/bag.webp" />
+                </div>
+                Travel Backpack
+              </td>
+              <td>Travel</td>
+              <td class="green">
+                <div class="status-green">
+                  <p class="text-in-small-box">Delivered</p>
+                </div>
+              </td>
+              <td>
+                <img class="icon-call" style="opacity: 60%" src="images/call.png" />
+              </td>
+              <td>2023-06-20</td>
+            </tr>
+
+            <tr>
+              <td class="product">
+                <div class="avatar-container">
+                  <img src="images/smartwatch.webp" />
+                </div>
+                Smartwatch
+              </td>
+              <td>Wearables</td>
+              <td class="green">
+                <div class="status-green">
+                  <p class="text-in-small-box">Delivered</p>
+                </div>
+              </td>
+              <td>
+                <img class="icon-call" style="opacity: 60%" src="images/call.png" />
+              </td>
+              <td>2023-07-10</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="formModal" id="#formModal">
+    <div>
+      <p style="color: grey; position: absolute; left: 95%; cursor: pointer" onclick="closeModal()">
+        X
+      </p>
+      <div style="text-align: center">
+        <p style="font-size: x-large; margin: 0px">How can we help you</p>
+        <p style="color: grey; margin-bottom: 20px">
+          Please choose an option bellow
+        </p>
+      </div>
+      <h2>Smart TV  - Electronics -   Delivered  -   2024-03-02</h2>
+      <p>What do you need assistance with?</p>
+      <div style="display: flex;" onclick="handlerAssistanceOnchange()">
+        <input type="radio" name="assistance" id="" />
+        <p style="margin-right: 140px">Return</p>
+        <input type="radio" name="assistance" id="" />
+        <p>Installation</p>
+      </div>
+
+      <div id="support-row">
+        <p>What kind kind of support you are looking for?</p>
+        <div style="display: flex;" onchange="handlerSupportOnchange()">
+          <input type="radio" name="support" id="" />
+          <p style="margin-right: 140px">Chat</p>
+          <input type="radio" name="support" id="" />
+          <p>Meeting</p>
+        </div>
+      </div>
+
+    </div>
+    <button class="get-help" onclick="openMeetingModal()">Get Help</button>
+  </div>
+
+  <div id="#meetingModal" class="meetingModal">
+    <p style="color: grey; position: absolute; left: 95%; cursor: pointer" onclick="closeMeetingModal()">
+      X
+    </p>
+    <div class="video-container">
+      <main id="root" style="margin: 1.5rem 0">
+        <section id="stream" class="container">
+          <div>
+            <div style="flex: 0.5" class="custom-fieldset" id="local-video-section">
+              <video id="local-video" class="stream-video" autoplay></video>
+              <audio id="local-audio" autoplay controls></audio>
+            </div>
+
+            <div style="flex: 0.5" class="custom-fieldset">
+              <video id="remote-video" class="stream-video" autoplay></video>
+              <audio id="remote-audio" autoplay controls></audio>
+              <div class="controls-btn-group" style="margin-top: 1rem">
+                <button id="toggle-audio-btn" onclick="toggleAudio()">
+                  <img class="icon" src="images/controls/mute.png" />
+                </button>
+                <button id="toggle-video-btn" onclick="toggleVideo()">
+                  <img class="icon" src="images/controls/video-on.png" />
+                </button>
+                <button id="toggle-screen-share-btn" onclick="toggleScreenShare()">
+                  <img class="icon" src="images/controls/start-sharing.png" />
+                </button>
+                <!-- Join the meeting -->
+
+                <button id="join-with-media" class="btn-primary">
+                  <img class="icon" src="images/controls/join-meeting.png" />
+                </button>
+                <button id="leave-meeting" class="btn-danger" style="display: none">
+                  <img class="icon" src="images/call.png" />
+                </button>
+                <br />
+                <fieldset style="flex: 0.5" class="custom-fieldset-vbg">
+                  <legend>VBG</legend>
+                  <div style="display: flex">
+                    <input type="radio" name="vbg" id="" checked />
+                    <p style="margin-right: 2rem">Blur</p>
+                    <input type="radio" name="vbg" id="" />
+                    <p style="margin-right: 2rem">Image</p>
+                    <button id="toggle-vbg-btn">Toggle VBG</button>
+                  </div>
+                </fieldset>
+
+              </div>
+            </div>
+            <!-- <fieldset style="flex: 0.5" class="custom-fieldset">
+              <legend>Transcription</legend>
+              <aside id="transcription-description">
+
+              </aside>
+            </fieldset> -->
+          </div>
+
+
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
+
+</html>

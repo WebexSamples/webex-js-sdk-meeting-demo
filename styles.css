@@ -1,0 +1,382 @@
+* {
+  font-size: small;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+.body {
+  width: 100%;
+  height: 100%;
+  background-color: #1a2034;
+}
+.side-nav {
+  margin: 10px 50px 10px 10px;
+  width: 320px;
+  height: 95vh;
+  border-radius: 10px;
+  background-color: #1f283d;
+}
+
+.main-view {
+  width: 100%;
+  height: 100vh;
+  flex-direction: column;
+  color: white;
+}
+
+.search {
+  position: relative;
+}
+
+.side-ele {
+  height: 40px;
+  font-weight: 600;
+  margin-top: 10px;
+  text-align: left;
+  padding: 0 0 0 30px;
+  color: white;
+}
+
+.side-ele-selected {
+  width: 82%;
+  height: 40px;
+  position: relative;
+  text-align: left;
+  padding: 0 0 0 30px;
+  color: white;
+  background: linear-gradient(
+    90deg,
+    rgba(37, 125, 232, 1) 0%,
+    rgba(57, 146, 235, 1) 52%
+  );
+  border-radius: 5px;
+  margin-left: 4px;
+  margin-top: -19px !important;
+  margin-bottom: 24px;
+}
+
+.profile {
+  width: 96%;
+  height: 30px;
+  position: relative;
+  text-align: center;
+  color: white;
+  background: linear-gradient(
+    90deg,
+    rgba(37, 125, 232, 1) 0%,
+    rgba(57, 146, 235, 1) 52%
+  );
+  border-radius: 5px;
+  margin-top: 52vh;
+  margin-left: 4px;
+}
+
+.icon {
+  width: 15px;
+  height: 15px;
+  vertical-align: middle; /* Adjust as needed */
+  margin-right: 10px;
+}
+
+.john {
+  position: relative;
+  top: 7px;
+}
+
+.text-in-box {
+  position: relative;
+  top: 15px;
+}
+
+.breadcrumb {
+  display: flex;
+  margin-top: 20px;
+  width: 100%;
+  height: 20px;
+}
+
+table {
+  width: 80%;
+  border-collapse: collapse;
+  margin: auto;
+  background-color: #202840;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+th,
+td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd; /* Solid line after each row */
+}
+
+th {
+  border-radius: 10px;
+  background-color: #202840;
+  color: #fff;
+}
+
+tr .header {
+  padding-top: 70px;
+  font-weight: 600;
+}
+
+.product-avatar {
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.avatar-container {
+  width: 30px; /* Set the width of your avatar */
+  height: 30px; /* Set the height of your avatar */
+  overflow: hidden;
+  border-radius: 50%; /* Make it a circle */
+  border: 2px solid #fff; /* Add a border if desired */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+  margin-right: 7px;
+}
+
+.avatar-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the image covers the entire container */
+  border-radius: 50%; /* Make sure the image within is also a circle */
+}
+
+.product {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding-right: 100px;
+}
+
+.icon-call {
+  width: 15px;
+  height: 15px;
+  vertical-align: middle; /* Adjust as needed */
+  margin-left: 25px;
+  cursor: pointer;
+}
+
+.status-green {
+  position: relative;
+  top: -5px;
+  background-color: #59b15d;
+  color: white;
+  text-align: center;
+  width: 80px;
+  height: 20px;
+  border-radius: 5px;
+}
+
+.status-yellow {
+  background-color: #fd9f1d;
+  color: white;
+  position: relative;
+  top: -5px;
+  color: white;
+  text-align: center;
+  width: 80px;
+  height: 20px;
+  border-radius: 5px;
+}
+
+.text-in-small-box {
+  position: relative;
+  top: 1px;
+}
+
+.product-table {
+  color: white;
+  width: 71.5%;
+  padding: 27px;
+  border-radius: 10px;
+  background: rgb(37, 125, 232);
+  background: linear-gradient(
+    90deg,
+    rgba(37, 125, 232, 1) 0%,
+    rgba(57, 146, 235, 1) 52%
+  );
+  position: absolute;
+  top: 99px;
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+
+.formModal {
+  position: absolute;
+  display: none;
+  width: 500px;
+  top: 18%;
+  left: 35%;
+  background: white;
+  box-shadow: inset;
+  padding: 20px;
+  font-weight: 400;
+  p {
+    color: black;
+  }
+}
+
+.get-help {
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
+  height: 40px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  display: none;
+  font-weight: 500;
+}
+
+.meetingModal {
+  position: absolute;
+  display: none;
+  width: 84%;
+  height: 50rem;
+  top: 11%;
+  left: 9%;
+  background: white;
+  box-shadow: inset;
+  padding: 20px;
+  margin: 0;
+  padding: 0;
+  p {
+    color: black;
+  }
+}
+
+.videoElement {
+  width: 100%;
+  height: 545px;
+}
+
+.controls {
+  width: 100%;
+  height: 67px;
+  position: relative;
+  background: rgb(37, 125, 232);
+  background: linear-gradient(
+    90deg,
+    rgba(37, 125, 232, 1) 0%,
+    rgba(57, 146, 235, 1) 52%
+  );
+  
+}
+
+#formModal p{
+  color: black !important;
+}
+
+.container {
+  max-width: 95%;
+  margin: 0 auto 1.5rem auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 3px 3px 8px 1p  x rgb(0 0 0 / 40%);
+}
+
+.btn-primary,.controls-btn-group button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+h2 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-top: 0;
+}
+
+.text-input {
+  padding: 6px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 15rem;
+  margin-bottom: 10px;
+}
+
+.info-message {
+  font-family: monospace;
+}
+
+.stream-video {
+  border: 1px solid #ccc;
+}
+
+.custom-fieldset-vbg {
+  border: 1px solid lightgrey;
+}
+
+.custom-fieldset video {
+    width: 105rem;
+    height: 34rem;
+}
+
+audio {
+  width: 100%;
+  height: 2rem;
+  margin-top: 1rem;
+}
+
+input[type="radio"]{
+  cursor: pointer;
+}
+#support-row{
+  display: none;
+}
+
+#local-video-section{
+  position: fixed;
+  bottom: 10%;
+  right: 5%;
+  background-color: white;
+  width: 20rem;
+  height: 14rem;
+  cursor: move;
+  border-radius: 0.5rem;
+}
+audio{
+  visibility: hidden;
+}
+#local-video-section video{
+  width: 24rem;
+}
+
+.controls-btn-group{
+  position: absolute;
+    bottom: 5%;
+    left: 40%;
+}
+.support-td{
+  cursor: pointer;
+}
+
+#join-with-media{
+  background-color: #59b15d;
+}
