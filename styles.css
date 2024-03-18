@@ -1,24 +1,22 @@
 * {
   font-size: small;
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 
 .body {
-  width: 100%;
-  height: 100%;
   background-color: #1a2034;
 }
 .side-nav {
   margin: 10px 50px 10px 10px;
   width: 320px;
-  height: 95vh;
+  height: 92vh;
   border-radius: 10px;
   background-color: #1f283d;
 }
 
 .main-view {
   width: 100%;
-  height: 100vh;
+  height: 92vh;
   flex-direction: column;
   color: white;
 }
@@ -29,7 +27,7 @@
 
 .side-ele {
   height: 40px;
-  font-weight: 100;
+  font-weight: 600;
   margin-top: 10px;
   text-align: left;
   padding: 0 0 0 30px;
@@ -43,11 +41,7 @@
   text-align: left;
   padding: 0 0 0 30px;
   color: white;
-  background: linear-gradient(
-    90deg,
-    rgba(37, 125, 232, 1) 0%,
-    rgba(57, 146, 235, 1) 52%
-  );
+  background: linear-gradient(90deg, rgba(37, 125, 232, 1) 0%, rgba(57, 146, 235, 1) 52%);
   border-radius: 5px;
   margin-left: 4px;
   margin-top: -19px !important;
@@ -60,11 +54,7 @@
   position: relative;
   text-align: center;
   color: white;
-  background: linear-gradient(
-    90deg,
-    rgba(37, 125, 232, 1) 0%,
-    rgba(57, 146, 235, 1) 52%
-  );
+  background: linear-gradient(90deg, rgba(37, 125, 232, 1) 0%, rgba(57, 146, 235, 1) 52%);
   border-radius: 5px;
   margin-top: 52vh;
   margin-left: 4px;
@@ -101,6 +91,7 @@ table {
   background-color: #202840;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+  font-weight: 500;
 }
 
 th,
@@ -118,6 +109,7 @@ th {
 
 tr .header {
   padding-top: 70px;
+  font-weight: 600;
 }
 
 .product-avatar {
@@ -182,9 +174,33 @@ tr .header {
   border-radius: 5px;
 }
 
+.status-grey {
+  background-color: #9c9995;
+  color: white;
+  position: relative;
+  top: -5px;
+  color: white;
+  text-align: center;
+  width: 80px;
+  height: 20px;
+  border-radius: 5px;
+}
+
+.status-red {
+  background-color: #dc3545;
+  color: white;
+  position: relative;
+  top: -5px;
+  color: white;
+  text-align: center;
+  width: 80px;
+  height: 20px;
+  border-radius: 5px;
+}
+
 .text-in-small-box {
   position: relative;
-  top: 1px;
+  top: 2px;
 }
 
 .product-table {
@@ -193,13 +209,11 @@ tr .header {
   padding: 27px;
   border-radius: 10px;
   background: rgb(37, 125, 232);
-  background: linear-gradient(
-    90deg,
-    rgba(37, 125, 232, 1) 0%,
-    rgba(57, 146, 235, 1) 52%
-  );
+  background: linear-gradient(90deg, rgba(37, 125, 232, 1) 0%, rgba(57, 146, 235, 1) 52%);
   position: absolute;
   top: 99px;
+  font-weight: 500;
+  font-size: 1.25rem;
 }
 
 .formModal {
@@ -211,6 +225,7 @@ tr .header {
   background: white;
   box-shadow: inset;
   padding: 20px;
+  font-weight: 400;
   p {
     color: black;
   }
@@ -226,6 +241,7 @@ tr .header {
   border: none;
   border-radius: 5px;
   display: none;
+  font-weight: 500;
 }
 
 .meetingModal {
@@ -243,6 +259,8 @@ tr .header {
   p {
     color: black;
   }
+
+  border-radius: 0.5rem;
 }
 
 .videoElement {
@@ -255,15 +273,10 @@ tr .header {
   height: 67px;
   position: relative;
   background: rgb(37, 125, 232);
-  background: linear-gradient(
-    90deg,
-    rgba(37, 125, 232, 1) 0%,
-    rgba(57, 146, 235, 1) 52%
-  );
-  
+  background: linear-gradient(90deg, rgba(37, 125, 232, 1) 0%, rgba(57, 146, 235, 1) 52%);
 }
 
-#formModal p{
+#formModal p {
   color: black !important;
 }
 
@@ -272,17 +285,17 @@ tr .header {
   margin: 0 auto 1.5rem auto;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 3px 3px 8px 1p  x rgb(0 0 0 / 40%);
+  box-shadow: 3px 3px 8px 1p x rgb(0 0 0 / 40%);
 }
 
-.btn-primary,.controls-btn-group button {
+.btn-primary,
+.controls-btn-group button {
   background-color: #007bff;
   color: #fff;
   border: none;
   padding: 8px 16px;
   border-radius: 5px;
   cursor: pointer;
-  width: 24%;
 }
 
 .btn-primary:hover {
@@ -290,7 +303,7 @@ tr .header {
 }
 
 .btn-danger {
-  background-color: #dc3545;
+  background-color: #dc3545 !important;
   color: #fff;
   border: none;
   padding: 8px 16px;
@@ -324,12 +337,13 @@ h2 {
   border: 1px solid #ccc;
 }
 
-.custom-fieldset {
+.custom-fieldset-vbg {
   border: 1px solid lightgrey;
 }
 
 .custom-fieldset video {
-  width: 41.75rem;
+  width: 96rem;
+  height: 34rem;
 }
 
 audio {
@@ -338,26 +352,62 @@ audio {
   margin-top: 1rem;
 }
 
-input[type="radio"]{
+input[type='radio'] {
   cursor: pointer;
 }
-#support-row{
+#support-row {
   display: none;
 }
 
-#local-video-section{
+#local-video-section {
   position: fixed;
   bottom: 10%;
   right: 5%;
   background-color: white;
-  width: 20rem;
+  width: 24rem;
   height: 14rem;
   cursor: move;
   border-radius: 0.5rem;
 }
-audio{
+audio {
   visibility: hidden;
 }
-#local-video-section video{
+#local-video-section video {
   width: 24rem;
+  height: 14rem;
+  border-radius: 0.5rem;
+}
+
+.controls-btn-group {
+  position: absolute;
+  bottom: 5%;
+  left: 40%;
+}
+.support-td {
+  cursor: pointer;
+}
+
+#join-with-media {
+  background-color: #59b15d;
+}
+
+.radio-container {
+  display: flex;
+  align-items: center;
+  flex: 0.5;
+
+  input {
+    margin-top: 1px;
+    margin-right: 4px;
+  }
+
+  label {
+    cursor: pointer;
+  }
+}
+
+.control-icon {
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
 }

@@ -8,22 +8,23 @@ const remoteAudioStreamElm = document.getElementById('remote-audio');
 const localVideoStreamElm = document.getElementById('local-video');
 const localAudioStreamElm = document.getElementById('local-audio');
 
-import { meetingInfo, guestEndpointUrl, vbgImageUrl, guestIssuerAccessToken } from './meeting-info.js';
+import { meetingInfo, guestEndpointUrl } from './meeting-info.js';
 
 let webex = null;
 let createdMeeting = null;
 let localStream = null;
+
+let vbgEffect = null;
+let bnrEffect = null;
 
 rootElement.addEventListener('click', async (e) => {
   switch (e.target.id) {
     case 'join-with-media':
       await joinMeeting();
       break;
-
     case 'toggle-vbg-btn':
       await toggleVBG();
       break;
-
     case 'leave-meeting':
       await leaveMeeting();
       break;
@@ -165,69 +166,6 @@ async function leaveMeeting() {
   reset();
 }
 
-async function joinMeeting() {
-  joinWithMediaBtn.innerHTML = 'Joining...';
-  joinWithMediaBtn.disabled = true;
-  joinWithMediaBtn.style.backgroundColor = 'grey';
-  joinWithMediaBtn.style.cursor = 'default';
-
-  try {
-    // Step-1
-    const accessToken = await getGuestAccessToken();
-
-    // Step-2
-    await initWebexAndRegisterDevice(accessToken);
-
-    // Step-3
-    await createMeeting();
-
-    // Step-4
-    setMediaListeners();
-
-    // Step-5
-    localStream = await getLocalStreams();
-
-    // Step-6
-    await joinMeetingWithMedia(localStream);
-  } catch (error) {
-    console.error('Error joining meeting', error);
-    reset();
-  }
-}
-
-let vbgEffect = null;
-let isVBGEnabled = false;
-
-async function toggleVBG() {
-  if (!vbgEffect) {
-    vbgEffect = await webex.meetings.createVirtualBackgroundEffect({
-      mode: 'IMAGE', // options are 'BLUR', 'IMAGE', 'VIDEO'
-      bgImageUrl: vbgImageUrl,
-      // bgVideoUrl: blurVBGVideoUrl,
-    });
-  }
-
-  await localStream.camera.addEffect(vbgEffect);
-
-  if (isVBGEnabled) {
-    await vbgEffect.disable();
-    isVBGEnabled = false;
-  } else {
-    await vbgEffect.enable();
-    isVBGEnabled = true;
-  }
-}
-
-async function addBNR() {
-  bnrEffect = await webex.meetings.createNoiseReductionEffect();
-  await localStream.microphone.addEffect(bnrEffect);
-  await bnrEffect.enable();
-}
-
-async function disableBNR() {
-  await bnrEffect.disable();
-}
-
 function reset() {
   // Join meeting button
   joinWithMediaBtn.style.display = 'block';
@@ -258,4 +196,66 @@ function cleanUpMedia() {
       }
     }
   });
+}
+
+async function joinMeeting() {
+  joinWithMediaBtn.innerText = 'Joining...';
+  joinWithMediaBtn.disabled = true;
+  joinWithMediaBtn.style.backgroundColor = 'grey';
+  joinWithMediaBtn.style.cursor = 'default';
+
+  try {
+    // Step-1
+    // const accessToken = await getGuestAccessToken();
+    const accessToken = await getGuestAccessTokenV2();
+
+    // Step-2
+    await initWebexAndRegisterDevice(accessToken);
+
+    // Step-3
+    await createMeeting();
+
+    // Step-4
+    setMediaListeners();
+
+    // Step-5
+    localStream = await getLocalStreams();
+
+    // Step-6
+    await joinMeetingWithMedia(localStream);
+  } catch (error) {
+    console.error('Error joining meeting', error);
+    reset();
+  }
+}
+
+let isVBGEnabled = false;
+async function toggleVBG() {
+  if (!vbgEffect) {
+    vbgEffect = await webex.meetings.createVirtualBackgroundEffect({
+      mode: 'IMAGE', // options are 'BLUR', 'IMAGE', 'VIDEO'
+      bgImageUrl: vbgImageUrl,
+      // bgVideoUrl: blurVBGVideoUrl,
+    });
+  }
+
+  await localStream.camera.addEffect(vbgEffect);
+
+  if (isVBGEnabled) {
+    await vbgEffect.disable();
+    isVBGEnabled = false;
+  } else {
+    await vbgEffect.enable();
+    isVBGEnabled = true;
+  }
+}
+
+async function addBNR() {
+  bnrEffect = await webex.meetings.createNoiseReductionEffect();
+  await localStream.microphone.addEffect(bnrEffect);
+  await bnrEffect.enable();
+}
+
+async function disableBNR() {
+  await bnrEffect.disable();
 }
