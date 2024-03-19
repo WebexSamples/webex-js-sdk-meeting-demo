@@ -1,4 +1,4 @@
-![image](https://github.com/WebexSamples/webex-js-sdk-meeting-demo/assets/8044050/53079d5a-b4a4-4e96-b21d-28846858c829)# Webex Web SDK - Webinar Demo
+# Webex Web SDK - Webinar Demo
 To run this demo, just download and open index.html on your browser and you should see it up and running
 
 ## Contact Us
