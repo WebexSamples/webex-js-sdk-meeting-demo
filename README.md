@@ -33,3 +33,8 @@ Webex SDK Contributors - https://eurl.io/#v-LbYXL27
 
 ### Transcription with Voicea
 - [Advanced Meeting Controls - Transcription](https://github.com/webex/webex-js-sdk/wiki/Advanced-Meeting-Controls#transcription)
+
+
+### Migration
+- [Web SDK V2 to V3 Migration](https://github.com/webex/webex-js-sdk/wiki/Migrating-SDK-Version-1-or-Version-2-to-Version-3)
+- [Migration to improved meetings associated with a space](https://github.com/webex/webex-js-sdk/wiki/Migration-to-improved-meetings-associated-with-a-space)
