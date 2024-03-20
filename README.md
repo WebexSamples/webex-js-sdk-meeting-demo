@@ -1,5 +1,8 @@
 # Webex Web SDK - Meetings Webinar Demo
-To run this demo, just download and open index.html on your browser and you should see it up and running
+To run this demo,
+- Clone this Repo
+- Go to the Root Folder
+- Do `npx http-server`
 
 ## Contact Us
 ### Contributors Space
