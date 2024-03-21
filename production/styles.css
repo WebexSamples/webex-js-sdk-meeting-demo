@@ -364,17 +364,18 @@ input[type='radio'] {
   bottom: 10%;
   right: 5%;
   background-color: white;
-  width: 24rem;
-  height: 14rem;
+  width: 30rem;
+  height: 20rem;
   cursor: move;
   border-radius: 0.5rem;
+  z-index: 3;
 }
 audio {
   visibility: hidden;
 }
 #local-video-section video {
-  width: 24rem;
-  height: 14rem;
+  width: 30rem;
+  height: 20rem;
   border-radius: 0.5rem;
 }
 
@@ -410,4 +411,13 @@ audio {
   width: 15px;
   height: 15px;
   vertical-align: middle;
+}
+
+.participant-name {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  z-index: 5;
+  font-size: 1.15rem;
+  font-weight: 500;
 }

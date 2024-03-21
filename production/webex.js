@@ -1,6 +1,7 @@
 const rootElement = document.getElementById('root');
 const joinWithMediaBtn = document.getElementById('join-with-media');
 const leaveMeetingBtn = document.getElementById('leave-meeting');
+const toggleVBGBtn = document.getElementById('toggle-vbg-btn');
 
 // Media elements
 const remoteVideoStreamElm = document.getElementById('remote-video');
@@ -13,6 +14,9 @@ import { meetingInfo, guestEndpointUrl, vbgImageUrl, guestIssuerAccessToken } fr
 let webex = null;
 let createdMeeting = null;
 let localStream = null;
+
+let vbgEffect = null;
+let isVBGEnabled = false;
 
 rootElement.addEventListener('click', async (e) => {
   switch (e.target.id) {
@@ -125,15 +129,29 @@ function setMediaListeners() {
 }
 
 async function getLocalStreams() {
-  const microphoneStream = await webex.meetings.mediaHelpers.createMicrophoneStream({ audio: true });
+  // https://github.com/webex/webex-js-sdk/wiki/Streams-and-Effects
+  const microphoneStream = await webex.meetings.mediaHelpers.createMicrophoneStream({
+    echoCancellation: true,
+    noiseSuppression: true,
+  });
 
-  const cameraStream = await webex.meetings.mediaHelpers.createCameraStream({ video: true, width: 640, height: 480 });
+  const cameraStream = await webex.meetings.mediaHelpers.createCameraStream({ width: 640, height: 480 }); // Optional params
   localVideoStreamElm.srcObject = cameraStream.outputStream;
 
   return {
     microphone: microphoneStream,
     camera: cameraStream,
   };
+}
+
+async function verifyPassword() {
+  const { isPasswordValid } = await createdMeeting.verifyPassword(meetingInfo.password);
+
+  if (!isPasswordValid) {
+    console.error('Invalid meeting password');
+
+    throw new Error('Invalid meeting password');
+  }
 }
 
 async function joinMeetingWithMedia(localStreams) {
@@ -143,13 +161,6 @@ async function joinMeetingWithMedia(localStreams) {
       localStreams,
     },
   };
-
-  const { isPasswordValid } = await createdMeeting.verifyPassword(meetingInfo.password);
-
-  if (!isPasswordValid) {
-    console.error('Invalid meeting password');
-    return;
-  }
 
   await createdMeeting.joinWithMedia(meetingOptions);
 
@@ -165,7 +176,7 @@ async function leaveMeeting() {
   reset();
 }
 
-async function joinMeeting() {
+export async function joinMeeting() {
   joinWithMediaBtn.innerHTML = 'Joining...';
   joinWithMediaBtn.disabled = true;
   joinWithMediaBtn.style.backgroundColor = 'grey';
@@ -188,6 +199,9 @@ async function joinMeeting() {
     localStream = await getLocalStreams();
 
     // Step-6
+    await verifyPassword();
+
+    // Step-7
     await joinMeetingWithMedia(localStream);
   } catch (error) {
     console.error('Error joining meeting', error);
@@ -195,10 +209,9 @@ async function joinMeeting() {
   }
 }
 
-let vbgEffect = null;
-let isVBGEnabled = false;
-
 async function toggleVBG() {
+  toggleVBGBtn.innerText = 'Toggling...';
+
   if (!vbgEffect) {
     vbgEffect = await webex.meetings.createVirtualBackgroundEffect({
       mode: 'IMAGE', // options are 'BLUR', 'IMAGE', 'VIDEO'
@@ -216,6 +229,8 @@ async function toggleVBG() {
     await vbgEffect.enable();
     isVBGEnabled = true;
   }
+
+  toggleVBGBtn.innerText = 'Toggle VBG';
 }
 
 async function addBNR() {
@@ -231,15 +246,15 @@ async function disableBNR() {
 function reset() {
   // Join meeting button
   joinWithMediaBtn.style.display = 'block';
-  joinWithMediaBtn.innerHTML = '<img class="control-icon" src="images/controls/join-meeting.png" />';
+  joinWithMediaBtn.innerHTML = 'Join';
   joinWithMediaBtn.disabled = false;
   joinWithMediaBtn.style.backgroundColor = '#59b15d';
   joinWithMediaBtn.style.cursor = 'pointer';
 
   // Leave meeting button
   leaveMeetingBtn.style.display = 'none';
-  leaveMeetingBtn.innerHTML = '<img class="control-icon" src="images/call.png" />';
-  leaveMeetingBtn.disabled = true;
+  leaveMeetingBtn.innerHTML = 'Leave';
+  leaveMeetingBtn.disabled = false;
 
   cleanUpMedia();
   createdMeeting = null;

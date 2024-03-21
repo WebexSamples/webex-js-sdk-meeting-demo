@@ -232,12 +232,18 @@
           <section id="stream" class="container">
             <div>
               <div style="flex: 0.5" class="custom-fieldset" id="local-video-section">
-                <video id="local-video" class="stream-video" autoplay></video>
+                <div style="position: relative">
+                  <video id="local-video" class="stream-video" autoplay></video>
+                  <span class="participant-name">John Doe (Customer)</span>
+                </div>
                 <audio id="local-audio" autoplay controls></audio>
               </div>
 
               <div style="flex: 0.5" class="custom-fieldset">
-                <video id="remote-video" class="stream-video" autoplay></video>
+                <div style="position: relative">
+                  <video id="remote-video" class="stream-video" autoplay></video>
+                  <span class="participant-name">Steve (Support Executive)</span>
+                </div>
                 <audio id="remote-audio" autoplay controls></audio>
                 <div class="controls-btn-group" style="margin-top: 1rem">
                   <div style="display: flex; justify-content: center; gap: 0.5rem">
@@ -251,12 +257,8 @@
                       <img class="control-icon" src="images/controls/start-sharing.png" />
                     </button>
                     <!-- Join the meeting -->
-                    <button id="join-with-media" class="btn-primary">
-                      <img class="control-icon" src="images/controls/join-meeting.png" />
-                    </button>
-                    <button id="leave-meeting" class="btn-danger" style="display: none">
-                      <img class="control-icon" src="images/end-call-white.png" />
-                    </button>
+                    <button id="join-with-media" class="btn-primary">Join</button>
+                    <button id="leave-meeting" class="btn-danger" style="display: none">Leave</button>
                   </div>
 
                   <fieldset style="flex: 0.5; margin-top: 1.5rem" class="custom-fieldset-vbg">
@@ -282,9 +284,8 @@
         </main>
       </div>
     </div>
-
-    <script defer type="text/javascript" src="index.js"></script>
     <script defer src="https://unpkg.com/webex@next/umd/webex.min.js"></script>
+    <script defer type="text/javascript" src="index.js"></script>
     <script type="module" type="text/javascript" src="webex.js"></script>
   </body>
 </html>
