@@ -184,7 +184,7 @@ export async function joinMeeting() {
 
   try {
     // Step-1
-    const accessToken = await getGuestAccessToken();
+    const accessToken = await getGuestAccessTokenV2();
 
     // Step-2
     await initWebexAndRegisterDevice(accessToken);
