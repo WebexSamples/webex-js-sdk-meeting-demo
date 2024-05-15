@@ -1,0 +1,11 @@
+{
+  "name": "main",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:WebexSamples/webex-js-sdk-meeting-demo.git",
+  "author": "Kesava Krishnan Madavan <mkesavan13@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "npx http-server"
+  }
+}

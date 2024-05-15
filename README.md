@@ -3,12 +3,8 @@
 To run this demo,
 
 - Clone this Repo
-- Go to the production Folder
-- create a file `meeting-info.js`
-  - Add `export const vbgImageUrl = './images/V_B_G.jpg';`
-  - Add `export const meetingInfo = {...}`. Fill the meetingInfo object with the response from the POST request of ` https://webexapis.com/v1/meetings` API
-  - Add `export const guestIssuerAccessToken = ''`. This token can be generated from Service App. Please find more details [here](https://developer.webex.com/docs/sa-guest-management).
-- Do `npx http-server`
+- Open [meeting-info.js](./meeting-info.js), read through the comments and update required information.
+- Once done, do `npx http-server`
 
 ## Contact Us
 
