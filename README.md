@@ -4,7 +4,7 @@ To run this demo,
 
 - Clone this Repo
 - Open [meeting-info.js](./meeting-info.js), read through the comments and update required information.
-- Once done, do `npx http-server`
+- Once done, do `yarn start`
 
 ## Contact Us
 
