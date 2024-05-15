@@ -5,6 +5,11 @@ To run this demo,
 - Clone this Repo
 - Open [meeting-info.js](./meeting-info.js), read through the comments and update required information.
 - Once done, do `yarn start`
+- Go to http://127.0.0.1:8080/ on your browser and Clicking on the "Call" icon will make the demo join the created meeting with Video and Audio
+
+## Vidcast to the Webinar of this Demo
+
+To get a better hold of this demo, please watch the full length Webinar here: [Upgrade Your App with Webex Meetings SDK V3 Simplified Integration and Enhanced Features](https://app.vidcast.io/share/bcd28aa8-ab52-46bc-8ca8-3c2aa41f8f83)
 
 ## Contact Us
 
