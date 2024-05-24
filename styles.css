@@ -1,6 +1,6 @@
 * {
   font-size: small;
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
 .body {
@@ -41,7 +41,11 @@
   text-align: left;
   padding: 0 0 0 30px;
   color: white;
-  background: linear-gradient(90deg, rgba(37, 125, 232, 1) 0%, rgba(57, 146, 235, 1) 52%);
+  background: linear-gradient(
+    90deg,
+    rgba(37, 125, 232, 1) 0%,
+    rgba(57, 146, 235, 1) 52%
+  );
   border-radius: 5px;
   margin-left: 4px;
   margin-top: -19px !important;
@@ -54,7 +58,11 @@
   position: relative;
   text-align: center;
   color: white;
-  background: linear-gradient(90deg, rgba(37, 125, 232, 1) 0%, rgba(57, 146, 235, 1) 52%);
+  background: linear-gradient(
+    90deg,
+    rgba(37, 125, 232, 1) 0%,
+    rgba(57, 146, 235, 1) 52%
+  );
   border-radius: 5px;
   margin-top: 52vh;
   margin-left: 4px;
@@ -209,7 +217,11 @@ tr .header {
   padding: 27px;
   border-radius: 10px;
   background: rgb(37, 125, 232);
-  background: linear-gradient(90deg, rgba(37, 125, 232, 1) 0%, rgba(57, 146, 235, 1) 52%);
+  background: linear-gradient(
+    90deg,
+    rgba(37, 125, 232, 1) 0%,
+    rgba(57, 146, 235, 1) 52%
+  );
   position: absolute;
   top: 99px;
   font-weight: 500;
@@ -273,7 +285,11 @@ tr .header {
   height: 67px;
   position: relative;
   background: rgb(37, 125, 232);
-  background: linear-gradient(90deg, rgba(37, 125, 232, 1) 0%, rgba(57, 146, 235, 1) 52%);
+  background: linear-gradient(
+    90deg,
+    rgba(37, 125, 232, 1) 0%,
+    rgba(57, 146, 235, 1) 52%
+  );
 }
 
 #formModal p {
@@ -353,7 +369,7 @@ audio {
   margin-top: 1rem;
 }
 
-input[type='radio'] {
+input[type="radio"] {
   cursor: pointer;
 }
 #support-row {
