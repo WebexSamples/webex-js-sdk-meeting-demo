@@ -1,59 +1,60 @@
-import { joinMeeting } from './webex.js';
+import { joinMeeting } from "./webex.js";
 
 function openModal() {
-  const body = document.getElementById('#body');
-  body.style.filter = 'blur(15px)';
+  const body = document.getElementById("#body");
+  body.style.filter = "blur(15px)";
 
-  const formModal = document.getElementById('#formModal');
-  formModal.style.display = 'block';
+  const formModal = document.getElementById("#formModal");
+  formModal.style.display = "block";
 }
 
 function closeModal() {
-  const body = document.getElementById('#body');
-  body.style.filter = 'none';
+  const body = document.getElementById("#body");
+  body.style.filter = "none";
 
-  const formModal = document.getElementById('#formModal');
-  formModal.style.display = 'none';
+  const formModal = document.getElementById("#formModal");
+  formModal.style.display = "none";
 }
 
 async function openMeetingModal() {
-  const formModal = document.getElementById('#formModal');
-  formModal.style.display = 'none';
+  const formModal = document.getElementById("#formModal");
+  formModal.style.display = "none";
 
-  const meetingModal = document.getElementById('#meetingModal');
-  meetingModal.style.display = 'block';
+  const meetingModal = document.getElementById("#meetingModal");
+  meetingModal.style.display = "block";
 
   await joinMeeting();
 }
 
 function closeMeetingModal() {
-  const body = document.getElementById('#body');
-  body.style.filter = 'none';
-  const meetingModal = document.getElementById('#meetingModal');
-  meetingModal.style.display = 'none';
+  const body = document.getElementById("#body");
+  body.style.filter = "none";
+  const meetingModal = document.getElementById("#meetingModal");
+  meetingModal.style.display = "none";
 }
 
 function handlerAssistanceOnchange() {
-  const supportRow = document.getElementById('support-row');
-  supportRow.style.display = 'block';
+  const supportRow = document.getElementById("support-row");
+  supportRow.style.display = "block";
 }
 
 function handlerSupportOnchange() {
-  const getHelpBtn = document.querySelector('.get-help');
-  getHelpBtn.style.display = 'block';
+  const getHelpBtn = document.querySelector(".get-help");
+  getHelpBtn.style.display = "block";
 }
 
 //Make the DIV element draggagle:
-dragElement(document.getElementById('local-video-section'));
+dragElement(document.getElementById("local-video-section"));
 
 function dragElement(elmnt) {
   var pos1 = 0,
     pos2 = 0,
     pos3 = 0,
     pos4 = 0;
-  if (document.getElementById(elmnt.id + 'local-video')) {
+  if (document.getElementById(elmnt.id + "local-video")) {
     /* if present, the header is where you move the DIV from:*/
-    document.getElementById(elmnt.id + 'local-video').onmousedown = dragMouseDown;
+    document.getElementById(elmnt.id + "local-video").onmousedown =
+      dragMouseDown;
   } else {
     /* otherwise, move the DIV from anywhere inside the DIV:*/
     elmnt.onmousedown = dragMouseDown;
@@ -79,8 +80,8 @@ function dragElement(elmnt) {
     pos3 = e.clientX;
     pos4 = e.clientY;
     // set the element's new position:
-    elmnt.style.top = elmnt.offsetTop - pos2 + 'px';
-    elmnt.style.left = elmnt.offsetLeft - pos1 + 'px';
+    elmnt.style.top = elmnt.offsetTop - pos2 + "px";
+    elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
   }
 
   function closeDragElement() {
@@ -91,8 +92,8 @@ function dragElement(elmnt) {
 }
 
 window.openModal = openModal;
-window.handlerSupportOnchange = handlerSupportOnchange
-window.handlerAssistanceOnchange = handlerAssistanceOnchange
-window.closeMeetingModal = closeMeetingModal
-window.openMeetingModal = openMeetingModal
-window.closeModal = closeModal
+window.handlerSupportOnchange = handlerSupportOnchange;
+window.handlerAssistanceOnchange = handlerAssistanceOnchange;
+window.closeMeetingModal = closeMeetingModal;
+window.openMeetingModal = openMeetingModal;
+window.closeModal = closeModal;
