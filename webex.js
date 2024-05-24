@@ -11,7 +11,6 @@ const localAudioStreamElm = document.getElementById("local-audio");
 
 import {
   meetingInfo,
-  guestEndpointUrl,
   vbgImageUrl,
   guestIssuerAccessToken,
   personalAccessToken,
@@ -48,7 +47,7 @@ rootElement.addEventListener("click", async (e) => {
 const guestUrl = "https://webexapis.com/v1/guests/token";
 
 // Via Service App
-async function getGuestAccessTokenV2() {
+async function getGuestAccessToken() {
   const response = await fetch(guestUrl, {
     method: "post",
     headers: {
@@ -65,24 +64,6 @@ async function getGuestAccessTokenV2() {
   const data = await response.json();
 
   return data.accessToken;
-}
-
-async function getGuestAccessToken() {
-  // Create the end point using guest issuer
-  const response = await fetch(guestEndpointUrl, {
-    method: "post",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name: "Guest User",
-    }),
-  });
-
-  const data = await response.json();
-
-  return data.body.token;
 }
 
 async function initWebexAndRegisterDevice(access_token) {
@@ -198,8 +179,8 @@ export async function joinMeeting() {
     // Step-1
     let accessToken;
 
-    if (guestEndpointUrl && guestIssuerAccessToken) {
-      accessToken = await getGuestAccessTokenV2();
+    if (guestIssuerAccessToken) {
+      accessToken = await getGuestAccessToken();
     } else {
       accessToken = personalAccessToken;
     }
