@@ -5,7 +5,13 @@ To run this demo,
 - Clone this Repo
 - Open [meeting-info.js](./meeting-info.js), read through the comments and update required information.
 - Once done, do `yarn start`
+
 - Go to http://127.0.0.1:8080/ on your browser and Clicking on the "Call" icon will make the demo join the created meeting with Video and Audio
+  ![Call help](./images/step1.png)
+
+- Complete the short form and click on "Get Help" ![Get help](./images/step2.png)
+- User will be connect to the customer support ![Meeting Window](./images/step3.png)
+- To enable virtual background click on "Toggle VBG" ![Toggle VGB](./images/step4.png)
 
 ## Vidcast to the Webinar of this Demo
 

@@ -9,7 +9,7 @@ const remoteAudioStreamElm = document.getElementById('remote-audio');
 const localVideoStreamElm = document.getElementById('local-video');
 const localAudioStreamElm = document.getElementById('local-audio');
 
-import { meetingInfo, guestEndpointUrl, vbgImageUrl, guestIssuerAccessToken } from './meeting-info.js';
+import { meetingInfo, guestEndpointUrl, vbgImageUrl, guestIssuerAccessToken,personalAccessToken } from './meeting-info.js';
 
 let webex = null;
 let createdMeeting = null;
@@ -184,7 +184,13 @@ export async function joinMeeting() {
 
   try {
     // Step-1
-    const accessToken = await getGuestAccessTokenV2();
+    let accessToken
+    
+    if(guestEndpointUrl && guestIssuerAccessToken){
+      accessToken = await getGuestAccessTokenV2();
+    } else{
+      accessToken = personalAccessToken
+  }
 
     // Step-2
     await initWebexAndRegisterDevice(accessToken);
@@ -199,7 +205,8 @@ export async function joinMeeting() {
     localStream = await getLocalStreams();
 
     // Step-6
-    await verifyPassword();
+    // Enable only if meeting is password protected.
+    // await verifyPassword();
 
     // Step-7
     await joinMeetingWithMedia(localStream);

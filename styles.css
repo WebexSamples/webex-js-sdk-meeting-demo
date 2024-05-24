@@ -342,8 +342,9 @@ h2 {
 }
 
 .custom-fieldset video {
-  width: 96rem;
-  height: 34rem;
+  width: 100%;
+  max-height: 448px;
+  object-fit: cover;
 }
 
 audio {
