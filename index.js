@@ -1,4 +1,4 @@
-// import { joinMeeting } from './webex.js';
+import { joinMeeting } from './webex.js';
 
 function openModal() {
   const body = document.getElementById('#body');
@@ -23,7 +23,7 @@ async function openMeetingModal() {
   const meetingModal = document.getElementById('#meetingModal');
   meetingModal.style.display = 'block';
 
-  // await joinMeeting();
+  await joinMeeting();
 }
 
 function closeMeetingModal() {
@@ -89,3 +89,10 @@ function dragElement(elmnt) {
     document.onmousemove = null;
   }
 }
+
+window.openModal = openModal;
+window.handlerSupportOnchange = handlerSupportOnchange
+window.handlerAssistanceOnchange = handlerAssistanceOnchange
+window.closeMeetingModal = closeMeetingModal
+window.openMeetingModal = openMeetingModal
+window.closeModal = closeModal
