@@ -26,7 +26,6 @@ let localStream = null;
 let vbgEffect = null;
 let isVBGEnabled = false;
 
-
 // Event Listeners
 rootElement.addEventListener("click", async (e) => {
   switch (e.target.id) {
@@ -53,7 +52,7 @@ rootElement.addEventListener("click", async (e) => {
 
 /**
  * Create a Guest User and returns their access token
- * 
+ *
  * @returns {Promise<string>} - Guest Access Token
  */
 async function getGuestAccessToken() {
@@ -108,7 +107,7 @@ async function createMeeting() {
 
 /**
  * Set media listeners to show remote video and audio
- * 
+ *
  * @returns {void}
  */
 function setMediaListeners() {
@@ -140,7 +139,7 @@ function setMediaListeners() {
 
 /**
  * Get local streams for microphone and camera
- * 
+ *
  * @returns {Promise<{microphone: MediaStream, camera: MediaStream}>}
  */
 async function getLocalStreams() {
@@ -165,7 +164,7 @@ async function getLocalStreams() {
 
 /**
  * Verify the meeting password
- * 
+ *
  * @returns {Promise<void>}
  * @throws {Error} - If the password is invalid
  */
@@ -183,7 +182,7 @@ async function verifyPassword() {
 
 /**
  * Join the meeting with media
- * 
+ *
  * @param {{microphone: MediaStream, camera: MediaStream}} localStreams - Local streams for microphone and camera
  * @returns {Promise<void>}
  */
@@ -203,7 +202,7 @@ async function joinMeetingWithMedia(localStreams) {
 
 /**
  * Leave the meeting
- * 
+ *
  * @returns {Promise<void>}
  */
 async function leaveMeeting() {
@@ -216,7 +215,7 @@ async function leaveMeeting() {
 
 /**
  * Main function to join the meeting
- * 
+ *
  * @returns {Promise<void>}
  */
 export async function joinMeeting() {
@@ -263,36 +262,42 @@ export async function joinMeeting() {
 
 /**
  * Toggle the Virtual Background
- * 
+ * https://github.com/webex/webex-js-sdk/wiki/Streams-and-Effects#apply-a-virtual-background-effect
+ *
  * @returns {Promise<void>}
  */
 async function toggleVBG() {
-  toggleVBGBtn.innerText = "Toggling...";
+  toggleVBGBtn.innerText = "Saving VBG...";
+  toggleVBGBtn.disabled = true;
 
-  if (!vbgEffect) {
-    vbgEffect = await webex.meetings.createVirtualBackgroundEffect({
-      mode: "IMAGE", // options are 'BLUR', 'IMAGE', 'VIDEO'
-      bgImageUrl: vbgImageUrl,
-      // bgVideoUrl: blurVBGVideoUrl,
-    });
+  // Remove VBG effect before adding a new one
+  if (vbgEffect) {
+    vbgEffect.disable();
   }
 
-  await localStream.camera.addEffect(vbgEffect);
-
-  if (isVBGEnabled) {
-    await vbgEffect.disable();
+  // Get the selected VBG option
+  let selectedVBG = document.querySelector('input[name="vbg"]:checked').id;
+  if (selectedVBG === "vbg-none") {
     isVBGEnabled = false;
   } else {
+    const mode = selectedVBG === "vbg-blur" ? "BLUR" : "IMAGE";
+    const bgImageUrl = selectedVBG === "vbg-blur" ? null : vbgImageUrl;
+    vbgEffect = await webex.meetings.createVirtualBackgroundEffect({
+      mode: mode, // options are 'BLUR', 'IMAGE', 'VIDEO'
+      bgImageUrl: bgImageUrl,
+    });
+    await localStream.camera.addEffect(vbgEffect);
     await vbgEffect.enable();
     isVBGEnabled = true;
   }
 
-  toggleVBGBtn.innerText = "Toggle VBG";
+  toggleVBGBtn.innerText = "Save VBG";
+  toggleVBGBtn.disabled = false;
 }
 
 /**
  * Add Background Noise Reduction effect
- * 
+ *
  * @returns {Promise<void>}
  */
 async function addBNR() {
@@ -303,7 +308,7 @@ async function addBNR() {
 
 /**
  * Disable Background Noise Reduction effect
- * 
+ *
  * @returns {Promise<void>}
  */
 async function disableBNR() {
