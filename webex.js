@@ -9,6 +9,8 @@ const remoteAudioStreamElm = document.getElementById("remote-audio");
 const localVideoStreamElm = document.getElementById("local-video");
 const localAudioStreamElm = document.getElementById("local-audio");
 
+const MEETING_PASSWORD_REQUIRED = "REQUIRED";
+
 import {
   meetingInfo,
   vbgImageUrl,
@@ -199,7 +201,9 @@ export async function joinMeeting() {
 
     // Step-6
     // Enable only if meeting is password protected.
-    // await verifyPassword();
+    if (createdMeeting.passwordStatus === MEETING_PASSWORD_REQUIRED) {
+      await verifyPassword();
+    }
 
     // Step-7
     await joinMeetingWithMedia(localStream);
