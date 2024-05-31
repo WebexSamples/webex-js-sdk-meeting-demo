@@ -1,29 +1,32 @@
-const rootElement = document.getElementById("root");
-const joinWithMediaBtn = document.getElementById("join-with-media");
-const leaveMeetingBtn = document.getElementById("leave-meeting");
-const toggleVBGBtn = document.getElementById("toggle-vbg-btn");
-
-// Media elements
-const remoteVideoStreamElm = document.getElementById("remote-video");
-const remoteAudioStreamElm = document.getElementById("remote-audio");
-const localVideoStreamElm = document.getElementById("local-video");
-const localAudioStreamElm = document.getElementById("local-audio");
-
 import {
   meetingInfo,
-  guestEndpointUrl,
   vbgImageUrl,
   guestIssuerAccessToken,
   personalAccessToken,
 } from "./meeting-info.js";
 
+// Constants
+const MEETING_PASSWORD_REQUIRED = "REQUIRED";
+const GUEST_URL = "https://webexapis.com/v1/guests/token";
+
+// DOM Elements
+const rootElement = document.getElementById("root");
+const joinWithMediaBtn = document.getElementById("join-with-media");
+const leaveMeetingBtn = document.getElementById("leave-meeting");
+const toggleVBGBtn = document.getElementById("toggle-vbg-btn");
+const remoteVideoStreamElm = document.getElementById("remote-video");
+const remoteAudioStreamElm = document.getElementById("remote-audio");
+const localVideoStreamElm = document.getElementById("local-video");
+const localAudioStreamElm = document.getElementById("local-audio");
+
+// Variables
 let webex = null;
 let createdMeeting = null;
 let localStream = null;
-
 let vbgEffect = null;
 let isVBGEnabled = false;
 
+// Event Listeners
 rootElement.addEventListener("click", async (e) => {
   switch (e.target.id) {
     case "join-with-media":
@@ -45,11 +48,15 @@ rootElement.addEventListener("click", async (e) => {
   e.stopPropagation();
 });
 
-const guestUrl = "https://webexapis.com/v1/guests/token";
+// Functions
 
-// Via Service App
-async function getGuestAccessTokenV2() {
-  const response = await fetch(guestUrl, {
+/**
+ * Create a Guest User and returns their access token
+ *
+ * @returns {Promise<string>} - Guest Access Token
+ */
+async function getGuestAccessToken() {
+  const response = await fetch(GUEST_URL, {
     method: "post",
     headers: {
       Accept: "application/json",
@@ -67,24 +74,12 @@ async function getGuestAccessTokenV2() {
   return data.accessToken;
 }
 
-async function getGuestAccessToken() {
-  // Create the end point using guest issuer
-  const response = await fetch(guestEndpointUrl, {
-    method: "post",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name: "Guest User",
-    }),
-  });
-
-  const data = await response.json();
-
-  return data.body.token;
-}
-
+/**
+ * Initialize Webex SDK and register the device (browser)
+ *
+ * @param {string} access_token - Access token to authenticate the user
+ * @returns {Promise<void>}
+ */
 async function initWebexAndRegisterDevice(access_token) {
   if (!access_token) {
     alert("Please provide an access token");
@@ -100,6 +95,9 @@ async function initWebexAndRegisterDevice(access_token) {
   await webex.meetings.register();
 }
 
+/**
+ * Create a meeting and store it in the createdMeeting variable
+ */
 async function createMeeting() {
   // MeetingInfo object being referenced from meeting-info.js
   const meeting = await webex.meetings.create(meetingInfo.sipAddress);
@@ -107,6 +105,11 @@ async function createMeeting() {
   createdMeeting = meeting;
 }
 
+/**
+ * Set media listeners to show remote video and audio
+ *
+ * @returns {void}
+ */
 function setMediaListeners() {
   // Wait for media in order to show video
   createdMeeting.on("media:ready", (media) => {
@@ -134,6 +137,11 @@ function setMediaListeners() {
   });
 }
 
+/**
+ * Get local streams for microphone and camera
+ *
+ * @returns {Promise<{microphone: MediaStream, camera: MediaStream}>}
+ */
 async function getLocalStreams() {
   // https://github.com/webex/webex-js-sdk/wiki/Streams-and-Effects
   const microphoneStream =
@@ -154,6 +162,12 @@ async function getLocalStreams() {
   };
 }
 
+/**
+ * Verify the meeting password
+ *
+ * @returns {Promise<void>}
+ * @throws {Error} - If the password is invalid
+ */
 async function verifyPassword() {
   const { isPasswordValid } = await createdMeeting.verifyPassword(
     meetingInfo.password,
@@ -166,6 +180,12 @@ async function verifyPassword() {
   }
 }
 
+/**
+ * Join the meeting with media
+ *
+ * @param {{microphone: MediaStream, camera: MediaStream}} localStreams - Local streams for microphone and camera
+ * @returns {Promise<void>}
+ */
 async function joinMeetingWithMedia(localStreams) {
   const meetingOptions = {
     mediaOptions: {
@@ -180,6 +200,11 @@ async function joinMeetingWithMedia(localStreams) {
   joinWithMediaBtn.style.display = "none";
 }
 
+/**
+ * Leave the meeting
+ *
+ * @returns {Promise<void>}
+ */
 async function leaveMeeting() {
   leaveMeetingBtn.innerHTML = "Leaving...";
   leaveMeetingBtn.disabled = true;
@@ -188,6 +213,11 @@ async function leaveMeeting() {
   reset();
 }
 
+/**
+ * Main function to join the meeting
+ *
+ * @returns {Promise<void>}
+ */
 export async function joinMeeting() {
   joinWithMediaBtn.innerHTML = "Joining...";
   joinWithMediaBtn.disabled = true;
@@ -198,8 +228,8 @@ export async function joinMeeting() {
     // Step-1
     let accessToken;
 
-    if (guestEndpointUrl && guestIssuerAccessToken) {
-      accessToken = await getGuestAccessTokenV2();
+    if (guestIssuerAccessToken) {
+      accessToken = await getGuestAccessToken();
     } else {
       accessToken = personalAccessToken;
     }
@@ -218,7 +248,9 @@ export async function joinMeeting() {
 
     // Step-6
     // Enable only if meeting is password protected.
-    // await verifyPassword();
+    if (createdMeeting.passwordStatus === MEETING_PASSWORD_REQUIRED) {
+      await verifyPassword();
+    }
 
     // Step-7
     await joinMeetingWithMedia(localStream);
@@ -228,40 +260,64 @@ export async function joinMeeting() {
   }
 }
 
+/**
+ * Toggle the Virtual Background
+ * https://github.com/webex/webex-js-sdk/wiki/Streams-and-Effects#apply-a-virtual-background-effect
+ *
+ * @returns {Promise<void>}
+ */
 async function toggleVBG() {
-  toggleVBGBtn.innerText = "Toggling...";
+  toggleVBGBtn.innerText = "Saving VBG...";
+  toggleVBGBtn.disabled = true;
 
-  if (!vbgEffect) {
-    vbgEffect = await webex.meetings.createVirtualBackgroundEffect({
-      mode: "IMAGE", // options are 'BLUR', 'IMAGE', 'VIDEO'
-      bgImageUrl: vbgImageUrl,
-      // bgVideoUrl: blurVBGVideoUrl,
-    });
+  // Remove VBG effect before adding a new one
+  if (vbgEffect) {
+    vbgEffect.disable();
   }
 
-  await localStream.camera.addEffect(vbgEffect);
-
-  if (isVBGEnabled) {
-    await vbgEffect.disable();
+  // Get the selected VBG option
+  let selectedVBG = document.querySelector('input[name="vbg"]:checked').id;
+  if (selectedVBG === "vbg-none") {
     isVBGEnabled = false;
   } else {
+    const mode = selectedVBG === "vbg-blur" ? "BLUR" : "IMAGE";
+    const bgImageUrl = selectedVBG === "vbg-blur" ? null : vbgImageUrl;
+    vbgEffect = await webex.meetings.createVirtualBackgroundEffect({
+      mode: mode, // options are 'BLUR', 'IMAGE', 'VIDEO'
+      bgImageUrl: bgImageUrl,
+    });
+    await localStream.camera.addEffect(vbgEffect);
     await vbgEffect.enable();
     isVBGEnabled = true;
   }
 
-  toggleVBGBtn.innerText = "Toggle VBG";
+  toggleVBGBtn.innerText = "Save VBG";
+  toggleVBGBtn.disabled = false;
 }
 
+/**
+ * Add Background Noise Reduction effect
+ *
+ * @returns {Promise<void>}
+ */
 async function addBNR() {
   bnrEffect = await webex.meetings.createNoiseReductionEffect();
   await localStream.microphone.addEffect(bnrEffect);
   await bnrEffect.enable();
 }
 
+/**
+ * Disable Background Noise Reduction effect
+ *
+ * @returns {Promise<void>}
+ */
 async function disableBNR() {
   await bnrEffect.disable();
 }
 
+/**
+ * Reset the UI and cleanup media
+ */
 function reset() {
   // Join meeting button
   joinWithMediaBtn.style.display = "block";
@@ -279,6 +335,9 @@ function reset() {
   createdMeeting = null;
 }
 
+/**
+ * Clean up media streams
+ */
 function cleanUpMedia() {
   // local streams can be used across meetings
   [

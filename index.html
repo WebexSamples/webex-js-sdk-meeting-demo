@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="styles.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>E-store</title>
+    <title>E-store Demo</title>
+    <script type="module" type="text/javascript" src="index.js"></script>
+    <script type="module" type="text/javascript" src="webex.js"></script>
   </head>
 
   <body class="body">
@@ -352,6 +354,7 @@
                       id="leave-meeting"
                       class="btn-danger"
                       style="display: none"
+                      title="Leave the meeting"
                     >
                       Leave
                     </button>
@@ -361,23 +364,30 @@
                     style="flex: 0.5; margin-top: 1.5rem"
                     class="custom-fieldset-vbg"
                   >
-                    <legend>VBG</legend>
+                    <legend>Virtual Background</legend>
                     <div style="display: flex">
-                      <input type="radio" name="vbg" id="" />
-                      <p style="margin-right: 2rem">Blur</p>
-                      <input type="radio" name="vbg" id="" checked />
-                      <p style="margin-right: 2rem">Image</p>
-                      <button id="toggle-vbg-btn">Toggle VBG</button>
+                      <input type="radio" name="vbg" id="vbg-none" />
+                      <p style="margin-right: 2rem">
+                        <label for="vbg-none">None</label>
+                      </p>
+                      <input type="radio" name="vbg" id="vbg-blur" />
+                      <p style="margin-right: 2rem">
+                        <label for="vbg-blur">Blur</label>
+                      </p>
+                      <input type="radio" name="vbg" id="vbg-image" checked />
+                      <p style="margin-right: 2rem">
+                        <label for="vbg-image">Image</label>
+                      </p>
+                      <button
+                        id="toggle-vbg-btn"
+                        title="Save Virtual Background Settings"
+                      >
+                        Save VBG
+                      </button>
                     </div>
                   </fieldset>
                 </div>
               </div>
-              <!-- <fieldset style="flex: 0.5" class="custom-fieldset">
-              <legend>Transcription</legend>
-              <aside id="transcription-description">
-
-              </aside>
-            </fieldset> -->
             </div>
           </section>
         </main>
@@ -387,7 +397,5 @@
       defer
       src="https://unpkg.com/webex@3.0.0-next.25/umd/webex.min.js"
     ></script>
-    <script type="module" type="text/javascript" src="index.js"></script>
-    <script type="module" type="text/javascript" src="webex.js"></script>
   </body>
 </html>

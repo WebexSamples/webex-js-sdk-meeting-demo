@@ -12,8 +12,7 @@ export const meetingInfo = {}; // REQUIRED
 // Update the following with the Guest Issuer Access Token through Service Apps
 // Read more about it here: https://developer.webex.com/docs/sa-guest-management
 // Note - Unless we have this token, this demo cannot join a meeting
-export const guestIssuerAccessToken = ""; // OPTIONAL
-export const guestEndpointUrl = ""; //OPTIONAL
+export const guestIssuerAccessToken = ""; // REQUIRED or personalAccessToken REQUIRED
 
 //To get access token visit - https://developer.webex.com/docs/getting-started
-export const personalAccessToken = ""; // REQUIRED
+export const personalAccessToken = ""; // REQUIRED or guestIssuerAccessToken REQUIRED
